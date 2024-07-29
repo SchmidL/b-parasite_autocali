@@ -71,10 +71,15 @@ def perform_measurement(sensor_name, condition, min_voltage=1700, max_voltage=30
     try:
         voltages = list(range(max_voltage, min_voltage, -step_voltage)) + list(range(min_voltage, max_voltage + step_voltage, step_voltage))
         
-        for voltage in voltages:
-            print(f"Setting voltage to {voltage / 1000.0}V")
-            ppk2_test.set_source_voltage(voltage)
-            time.sleep(wait_time)
+        with Progress() as progress:
+            task = progress.add_task(f"[green]Measuring {condition} condition...", total=len(voltages))
+
+            for voltage in voltages:
+                print(f"Setting voltage to {voltage / 1000.0}V")
+                ppk2_test.set_source_voltage(voltage)
+                time.sleep(wait_time)
+                progress.advance(task)
+
             
     finally:
         rtt_process.terminate()

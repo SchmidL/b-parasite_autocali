@@ -5,6 +5,8 @@ import json
 import os
 import threading
 
+from autocalibration_dataprocessing import *
+from rich.progress import Progress
 
 from ppk2_api.ppk2_api import PPK2_API
 
@@ -53,12 +55,13 @@ def save_parameters(sensor_name, condition, min_voltage, max_voltage, step_volta
     
     print(f"Parameters saved to {filename}")
 
-def perform_measurement(sensor_name, condition, min_voltage=1700, max_voltage=3000, step_voltage=100, wait_time=10):
+def perform_measurement(sensor_name, condition, min_voltage=1700, max_voltage=3000, step_voltage=100, wait_time=10, output_dir='output'):
     # Save parameters to json file
     save_parameters(sensor_name, condition, min_voltage, max_voltage, step_voltage, wait_time)
 
     # Create a unique filename with the sensor name and condition
-    log_file = f"{sensor_name}_calibration_{condition}.txt"
+    log_file = os.path.join(output_dir, f"{sensor_name}_calibration_{condition}.txt")
+
 
     # Start RTT logging using rtt-console with the new arguments
     rtt_process = subprocess.Popen(
@@ -97,6 +100,7 @@ def prompt_user(message):
             print("\nProcess interrupted by user")
             raise
 
+
 def main():
     global ppk2_test
     ppk2_test = setup_ppk2()
@@ -119,8 +123,7 @@ def main():
     else:
         print("Measurement for 'wet' condition was not completed.")
 
-if __name__ == "__main__":
-    main()
+
 
 if __name__ == "__main__":
     main()

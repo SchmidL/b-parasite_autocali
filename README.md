@@ -6,12 +6,12 @@ This repository contains an auto-calibration routine developed for the [b-parasi
 
 The auto-calibration routine is designed to simplify the calibration process of the b-parasite sensors by automating voltage sweeps and capturing the output ADC voltage. The routine is designed to capture both dry and wet calibration conditions, and directly computes the needed coefficient which insert firmware source before build.
 
-The script depends heavily on the [ppk2-api project](https://github.com/IRNAS/ppk2-api-python) from [IRNAS](https://github.com/IRNAS)and from the original [rtt-console](https://github.com/Mcublog/rtt-console) by [Mcublog](https://github.com/Mcublog)
+The script depends heavily on the [ppk2-api project](https://github.com/IRNAS/ppk2-api-python) from [IRNAS](https://github.com/IRNAS) and from the original [rtt-console](https://github.com/Mcublog/rtt-console) by [Mcublog](https://github.com/Mcublog)
 
 ## Hardware
 In the current state, the following hardware is needed
 - b-parasite (fully populated)
-- nrf Power Profiling Kit 2 (PPK2)
+- nordic semiconductor Power Profiling Kit 2 (PPK2)
 - J-Link programmer (in my case an J-Link edu mini)
 
 ## Installation
@@ -49,7 +49,7 @@ To use this auto-calibration routine, follow these steps:
 ## Wiring
 For the calibration, the following setup is needed.
 - The b-parasite is connected to a J-Link. In the following overview it is connected via a normal pitch to half pitch converter
-- The b-parasite is powered by the nrf PPK2. This should be in the best case connected via the battery terminal. (I made a small battery dummy from scrap part)
+- The b-parasite is powered by the PPK2. This should be in the best case connected via the battery terminal. (I made a small battery dummy from scrap part)
 - The "+"-terminal should be connected to VOUT on the PPK2, the "-"-terminal to GND
 
 ![wiring_overview](/docs/img/wiring_bparasite_calibration.jpeg)

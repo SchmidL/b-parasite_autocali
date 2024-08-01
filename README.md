@@ -20,24 +20,28 @@ To use this auto-calibration routine, follow these steps:
 
 1. **Clone the repositories:**
    ```bash
-   git clone https://github.com/SchmidL/b-parasite-autocalibration.git
-   cd b-parasite-autocalibration
-
+   git clone git@github.com:SchmidL/b-parasite_autocali.git
+   cd b-parasite_autocali
    ```
 1. **Create and activate a virtual environment (optional but recommended):**
     ```bash
-    python3 -m venv venv
-    source venv/bin/activate
+    conda create -n bparasite_autocali python=3.10
+    conda activate bparasite_autocali
     ```
 
 1. **Install the required dependencies:**
     ```bash
-    pip install numpy, matplotlib, ppk2-api
+    pip install numpy matplotlib rich
     ```
 1. **Additionall install modified rtt-console**
     ```bash
-    git clone https://github.com/SchmidL/rtt-console
+    git clone git@github.com:SchmidL/rtt-console.git
     cd rtt-console
+    pip install .
+    cd ../
+
+    git clone https://github.com/IRNAS/ppk2-api-python.git
+    cd ppk2-api-python
     pip install .
     cd ../
     ```
@@ -60,7 +64,7 @@ To run the auto-calibration routine, follow these steps:
     python autocalibration.py
     ```
     The parameters like max/min voltage for the sweep, the stationary duration, and the step size can be changed in the python file
-
+1. It can happen that the terms and condition of the J-LINK have to be accepted. Without that no data will be logged!
 1. Then follow the prompts. When you get asked to measure the "dry" condition, keep the sensor dry, in open-air.
 When in "wet" condition, put it in glass of water until the marking of the silkscreen on the PCB.
 Additionally, a name for the sensor can be entered for later identification of the files.

@@ -1,0 +1,8 @@
+{
+    "sensor_name": "sensor_10s",
+    "condition": "dry",
+    "min_voltage": 1800,
+    "max_voltage": 3300,
+    "step_voltage": 100,
+    "wait_time": 10
+}

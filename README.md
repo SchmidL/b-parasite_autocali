@@ -59,6 +59,8 @@ To run the auto-calibration routine, follow these steps:
     ```bash
     python autocalibration.py
     ```
+    The parameters like max/min voltage for the sweep, the stationary duration, and the step size can be changed in the python file
+
 1. Then follow the prompts. When you get asked to measure the "dry" condition, keep the sensor dry, in open-air.
 When in "wet" condition, put it in glass of water until the marking of the silkscreen on the PCB.
 Additionally, a name for the sensor can be entered for later identification of the files.
@@ -101,9 +103,30 @@ Example JSON Settings File:
     "wait_time": 2
 }
 ```
-## Analysis
+## Remarks
+For me several points showed up during the development:
+- the maximum of data capture was 15 min, longer session were not captured anymore
 
-Coming soon...
+## Analysis
+Having this code already, I conducted some - not very research grade - test for stuff I was wandering.
+
+#### First calibration
+In a first experiment, the setup was test with a 10s stationary duration for the quasi full voltage range, which is accepted from the module.
+Overall the data looks clean, besides a at very low voltage of ~1.7V where the values of the ADC are a bit higher. But I see that in general already an edge case, where the battery would need to be replaced anyway soon.
+![10s_full test](/docs/img/sensor_10s_calibration_plot.png)
+
+#### Hysteresis
+I was curious if any hysteresis is present with longer operation time (no sleep). But in the plot not significant discrepancies is present. 
+![hysteresis test](/docs/img/sensor_20s_hysteresis.png)
+
+#### Glass vs Plastic Cup
+A short test was also conducted if there is a difference seen using a glass or plastic cup for the calibration. I expected no big changes.
+This can also be seen in the paramtere which are quite close, and e.g. show a difference due to the not so perfectly same adjusted water level.
+
+```
+wet_glass = <(-3400) 56600 (-38400)>
+wet_plastic = <(-3300) 55800 (-36600)>
+```
 
 ## Contributing
 

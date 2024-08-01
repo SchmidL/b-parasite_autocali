@@ -38,10 +38,14 @@ def setup_ppk2():
     ppk2_test.set_source_voltage(3300)
     ppk2_test.use_source_meter()  # set source meter mode
     return ppk2_test
+
 def ensure_directory_exists(directory):
     """Checks if the directory exists and creates it if it doesn't."""
     if not os.path.exists(directory):
         os.makedirs(directory)
+    ppk2_test.toggle_DUT_power("ON")  # enable DUT power
+    return ppk2_test
+    
 def save_parameters(sensor_name, condition, min_voltage, max_voltage, step_voltage, wait_time):
     parameters = {
         "sensor_name": sensor_name,
@@ -57,15 +61,18 @@ def save_parameters(sensor_name, condition, min_voltage, max_voltage, step_volta
     
     print(f"Parameters saved to {filename}")
 
+
 def perform_measurement(sensor_name, condition, min_voltage=1700, max_voltage=3000, step_voltage=100, wait_time=10, output_dir='./output'):
     # Save parameters to json file
     save_parameters(sensor_name, condition, min_voltage, max_voltage, step_voltage, wait_time)
 
     # Create a unique filename with the sensor name and condition
+
     ensure_directory_exists(output_dir)
     log_file = os.path.join(output_dir, f"{sensor_name}_calibration_{condition}.txt")
 
     ppk2_test.toggle_DUT_power("ON")  # enable DUT power
+
     # Start RTT logging using rtt-console with the new arguments
     rtt_process = subprocess.Popen(
         ['rtt-console', '--log-file', log_file, '--no-input'],
@@ -114,7 +121,7 @@ def main():
 
     # Dry condition measurement
     if prompt_user("Setup sensor in 'dry' (air) condition and type 'OK' when ready: "):
-        perform_measurement(sensor_name, 'dry', min_voltage=1800, max_voltage=3300, step_voltage=100, wait_time=60*15)
+        perform_measurement(sensor_name, 'dry', min_voltage=2900, max_voltage=3000, step_voltage=100, wait_time=10)
         print("Measurement for 'dry' condition completed successfully.")
     else:
         print("Measurement for 'dry' condition was not completed.")
@@ -122,7 +129,9 @@ def main():
 
     # Wet condition measurement
     if prompt_user("Setup sensor in 'wet' (water) condition and type 'OK' when ready: "):
-        perform_measurement(sensor_name, 'wet', min_voltage=2900, max_voltage=3000, step_voltage=100, wait_time=100)
+
+        perform_measurement(sensor_name, 'wet', min_voltage=2900, max_voltage=3000, step_voltage=100, wait_time=10)
+
         print("Measurement for 'wet' condition completed successfully.")
     else:
         print("Measurement for 'wet' condition was not completed.")

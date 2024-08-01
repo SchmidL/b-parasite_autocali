@@ -1,12 +1,12 @@
 # b-parasite Auto-Calibration Routine
 
-This repository contains an auto-calibration routine developed for the [b-parasite project](https://github.com/rbaron/b-parasite). The b-parasite is an open-source soil moisture and ambient temperature/humidity sensor. This routine automates the calibration process, allowing for faster and less error-prone measurements.
+This repository contains an auto-calibration routine developed for the [b-parasite project](https://github.com/rbaron/b-parasite) by [rbaron](https://github.com/rbaron). The b-parasite is an open-source soil moisture and ambient temperature/humidity sensor. This routine automates the calibration process, allowing for faster and less error-prone measurements.
 
 ## Description
 
 The auto-calibration routine is designed to simplify the calibration process of the b-parasite sensors by automating voltage sweeps and capturing the output ADC voltage. The routine is designed to capture both dry and wet calibration conditions, and directly computes the needed coefficient which insert firmware source before build.
 
-The script depends heavily on the [ppk2-api project](https://github.com/IRNAS/ppk2-api-python) from [IRNAS](https://github.com/IRNAS)and from the original [rtt-console](https://github.com/Mcublog/rtt-console)by [Mcublog](https://github.com/Mcublog)
+The script depends heavily on the [ppk2-api project](https://github.com/IRNAS/ppk2-api-python) from [IRNAS](https://github.com/IRNAS)and from the original [rtt-console](https://github.com/Mcublog/rtt-console) by [Mcublog](https://github.com/Mcublog)
 
 ## Hardware
 In the current state, the following hardware is needed

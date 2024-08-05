@@ -131,6 +131,10 @@ This can also be seen in the paramtere which are quite close, and e.g. show a di
 wet_glass = <(-3400) 56600 (-38400)>
 wet_plastic = <(-3300) 55800 (-36600)>
 ```
+#### Consistency of the calibration curve for multiple sensors
+After the first batch calibration, a comparison of the multiple calibration curves, should show if one calibration per batch, or even hardware version would be possible.
+It shows that the most of the sensors are in an equal range besides 1 (sensor6). What the difference is, I cannot say for now, but will show with more sensors in use
+![consistency_multiple_sensors](/docs/img/consistency_multiple_sensors.png)
 
 ## Contributing
 
